@@ -1,0 +1,50 @@
+﻿<Window x:Class="MusicPlayList.View.CountryChooser"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MusicPlayList.View"
+        mc:Ignorable="d"
+        Title="Country chooser" Height="450" Width="900" Background="#04c582" ResizeMode="NoResize">
+    <Grid Margin="0,0,0,-21">
+        <Border  Background="#2e3137" CornerRadius="20" Margin="30">
+
+            <ListBox Background="#2e3137" ItemsSource="{Binding Areas_count}" HorizontalContentAlignment="Stretch">
+                <ListBox.Template>
+                    <ControlTemplate>
+                        <DockPanel LastChildFill="True">
+                            <Grid DockPanel.Dock="Top" Height="30" HorizontalAlignment="Center">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30"></ColumnDefinition>
+                                    <ColumnDefinition Width="200"></ColumnDefinition>
+                                    <ColumnDefinition Width="100"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Foreground="#FFE0E0E0" Grid.Column="1">Area</Label>
+                                <Label Foreground="#FFE0E0E0" Grid.Column="2" Margin="0,0,-14,0">Number of Songs</Label>
+                            </Grid>
+                            <ItemsPresenter></ItemsPresenter>
+                        </DockPanel>
+                    </ControlTemplate>
+                </ListBox.Template>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0,2" HorizontalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30"></ColumnDefinition>
+                                <ColumnDefinition Width="200"></ColumnDefinition>
+                                <ColumnDefinition Width="100"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <CheckBox IsChecked="{Binding IsChecked}"/>
+                            <TextBox Background="White" Foreground="Black" Text="{Binding Extension}" Grid.Column="1"></TextBox>
+                            <TextBox Background="White" Foreground="Black" Text="{Binding Count}" Grid.Column="3"></TextBox>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
+        <Button IsEnabled="{Binding Path=IsButtonEnabled}" Content="Continue" Margin="207,342,487.6,65" Name="btnContinue" Click="ContinueBtn_Click" Background="#545d6a" Foreground="White" FontSize="20"/>
+        <Button IsEnabled="{Binding Path=IsButtonEnabled}" Content="Choose Random" Margin="445,342,187.6,65" Name="btnRandom" Click="RandomBtn_click" Background="#545d6a" Foreground="White" FontSize="20"/>
+        <TextBlock HorizontalAlignment="Center" Text="{Binding Error}" Margin="182,376,450.6,35" Foreground="White" FontSize="10"></TextBlock>
+    </Grid>
+</Window>

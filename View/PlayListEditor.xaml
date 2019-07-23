@@ -1,0 +1,113 @@
+﻿<Window x:Class="MusicPlayList.View.PlayListEditor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MusicPlayList.View"
+        mc:Ignorable="d"
+        Title="PlayListEditor" Height="450" Width="900"  Background="#04c582" ResizeMode="NoResize">
+    <Border Background="#2e3137" CornerRadius="20" Margin="15">
+        <Grid TextBlock.FontSize="14">
+
+            <Grid Margin="272,42,8,18" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="103*"/>
+                    <RowDefinition Height="96*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="280"/>
+                    <ColumnDefinition Width="187"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock  Padding="3" Margin="153,-38,138,0" Foreground="White" HorizontalAlignment="Center" 
+                            FontSize="20" FontStyle="Italic" Text="PlayList Editor" VerticalAlignment="Top" Width="176" Grid.ColumnSpan="2"/>
+                <DataGrid ItemsSource="{Binding VM_GetPlayList.Songs}" SelectedItem="{Binding RemoveSong}"  AutoGenerateColumns="False" CanUserAddRows="False" VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" Width="467" Height="300" Grid.ColumnSpan="2">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Song" Width="*" IsReadOnly="True" Binding="{Binding Name}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+                                    <Setter Property="ToolTip" Value="{Binding Text, 
+                                 RelativeSource={RelativeSource Self}}"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Artist" Width="*" IsReadOnly="True" Binding="{Binding Artist.Name}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+                                    <Setter Property="ToolTip" Value="{Binding Text, 
+                                 RelativeSource={RelativeSource Self}}"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Album" Width="*" IsReadOnly="True" Binding="{Binding Album.Name}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+                                    <Setter Property="ToolTip" Value="{Binding Text, 
+                                 RelativeSource={RelativeSource Self}}"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Genre" Width="*" IsReadOnly="True" Binding="{Binding Artist.Genre}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+                                    <Setter Property="ToolTip" Value="{Binding Text, 
+                                 RelativeSource={RelativeSource Self}}"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Hotness" FontSize="15" Foreground="YellowGreen" Width="*" IsReadOnly="True" Binding="{Binding HotnessStar}"/>
+                        <DataGridTextColumn Header="Duration" Width="*" IsReadOnly="True" Binding="{Binding Duration}"/>
+                        <DataGridTextColumn Header="year" Width="*" IsReadOnly="True" Binding="{Binding Year}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Button  x:Name="RemoveBtn" Content="Remove"  Grid.Row="5" Command="{Binding Remove}" IsEnabled="{Binding SelectedItems.Count, ElementName=lstBox}" Grid.ColumnSpan="2" />
+            </Grid>
+            <Button Content="submit" Height="27" HorizontalAlignment="Left" Margin="10,345,0,0" Name="btnSave" VerticalAlignment="Top" Width="55" Click="SubmitBtn_Click" RenderTransformOrigin="0.586,-0.043" />
+            <Label Content="Genre:" HorizontalAlignment="Left" Height="34" Margin="94,22,0,0" VerticalAlignment="Top" Width="60" Foreground="White" RenderTransformOrigin="1.758,0.354"/>
+            <Grid HorizontalAlignment="Left" Height="109" Margin="53,61,0,0" VerticalAlignment="Top" Width="156">
+                <ListBox Background="#2e3137" SelectionMode="Multiple"  Foreground="White" ItemsSource="{Binding Vm_CurrentGenres}" >
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="IsSelected" Value="{Binding IsChecked}"/>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <ListBoxItem Content="{Binding Extension}"></ListBoxItem>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+            <Label Content="Tempo:" HorizontalAlignment="Left" Height="34" Margin="94,175,0,0" VerticalAlignment="Top" Width="60" Foreground="White" RenderTransformOrigin="1.758,0.354"/>
+            <Grid HorizontalAlignment="Left" Height="83" Margin="53,233,0,0" VerticalAlignment="Top" Width="156">
+                <ListBox Background="#2e3137"  Foreground="White" SelectionMode="Multiple" ItemsSource="{Binding Vm_TempoList}" Margin="0,-24,0,24" >
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="IsSelected" Value="{Binding IsChecked}"/>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <ListBoxItem Content="{Binding Extension}"></ListBoxItem>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+            <Button x:Name="button" Click="FilterBtn_click" Content="Filter" HorizontalAlignment="Left" Margin="94,345,0,0" VerticalAlignment="Top" Width="55" Height="27">
+            </Button>
+            <Button Click="ResetBtn_Click" Content="Reset" HorizontalAlignment="Left" Margin="173,345,0,0" VerticalAlignment="Top" Width="75" Height="27"/>
+        </Grid>
+    </Border>
+</Window>

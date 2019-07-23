@@ -1,0 +1,35 @@
+﻿<Window x:Class="MusicPlayList.View.LocationMapChooser"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MusicPlayList.View"
+        mc:Ignorable="d"
+        Title="LocationMapChooser" Height="750" Width="900" Background="#04c582" ResizeMode="NoResize">
+    <Border Background="#2e3137" x:Name="border" CornerRadius="20" Margin="30">
+        <StackPanel x:Name="panel" Margin="20,23,20,41">
+            <Label x:Name="label" Content="Choose location" Foreground="White" FontStyle="Italic" Height="60" FontSize="40" HorizontalAlignment="Center" RenderTransformOrigin="0.499,0.714"/>
+            <Separator Height="55" x:Name="separtor" ></Separator>
+
+            <Grid x:Name="gridMap">
+                <Image  Source="{Binding MapImgPath}"  MouseLeftButtonDown="OnMapClick" x:Name="worldMap" Margin="5,5,5,5" Height="360" Width="720"/>
+                <Ellipse Height="8" Width="8" VerticalAlignment="Top" Margin="{Binding EllipseMargin}"  HorizontalAlignment="Left"  Fill="red" Stroke="Black">
+                    <Ellipse.Style>
+                        <Style TargetType="{x:Type Ellipse}">
+                            <Setter Property="Visibility" Value="Hidden" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=CircleFlag}" Value="true">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Ellipse.Style>
+                </Ellipse>
+
+
+            </Grid>
+            <Separator Height="55" ></Separator>
+            <Button x:Name="BtnNext" Click="BtnNext_Click"  Content="Next" Background="#545d6a" Foreground="White" FontSize="20" Height="34" RenderTransformOrigin="0.5,0.5" Margin="334,10,341.6,0" />
+        </StackPanel>
+    </Border>
+</Window>

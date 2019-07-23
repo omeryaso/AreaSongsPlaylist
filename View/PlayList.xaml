@@ -1,0 +1,83 @@
+﻿<Window x:Class="MusicPlayList.View.PlayList"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MusicPlayList.View"
+        mc:Ignorable="d"
+        Title="PlayList" Height="450" Width="900" Background="#04c582">
+    <Border Background="#2e3137" CornerRadius="20" Margin="15">
+
+        <Grid>
+
+            <!--<Window.Resources>
+                <ResourceDictionary>
+                    <local: x:Key="NameToBrushConverter"/>
+                </ResourceDictionary>-->
+            <!--
+            </Window.Resources>-->
+            <Grid TextBlock.FontSize="14" Background="#2e3237" Margin="15,0">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Padding="3" Margin="3" HorizontalAlignment="Center" Foreground="White" FontSize="35" Text="Playlist" VerticalAlignment="Top" Grid.ColumnSpan="2" />
+                <DataGrid CanUserAddRows="false" Grid.ColumnSpan="2" Grid.RowSpan="4" ItemsSource="{Binding VM_LogsList}"  AutoGenerateColumns="False" Margin="0,58,-0.4,10.4" Background="#545d6a">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Song" Width="*" IsReadOnly="True" Binding="{Binding Name}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+                                    <Setter Property="ToolTip" Value="{Binding Text, 
+                                 RelativeSource={RelativeSource Self}}"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Artist" Width="*" IsReadOnly="True" Binding="{Binding Artist.Name}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+                                    <Setter Property="ToolTip" Value="{Binding Text, 
+                                 RelativeSource={RelativeSource Self}}"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Album" Width="*" IsReadOnly="True" Binding="{Binding Album.Name}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+                                    <Setter Property="ToolTip" Value="{Binding Text, 
+                                 RelativeSource={RelativeSource Self}}"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Genre" Width="*" IsReadOnly="True" Binding="{Binding Artist.Genre}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+                                    <Setter Property="ToolTip" Value="{Binding Text, 
+                                 RelativeSource={RelativeSource Self}}"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Header="Hotness" FontSize="15" Foreground="YellowGreen" Width="*" IsReadOnly="True" Binding="{Binding HotnessStar}"/>
+                        <DataGridTextColumn Header="Duration" Width="*" IsReadOnly="True" Binding="{Binding Duration}"/>
+                        <DataGridTextColumn Header="year" Width="*" IsReadOnly="True" Binding="{Binding Year}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                
+            </Grid>
+            <Button Content="Edit"  FontSize="13" Height="25" HorizontalAlignment="Left" Margin="215,19,0,0"  VerticalAlignment="Top" Width="90" Name="btnEdit"  Click="BtmEdit_Click" />
+            <Button Content="Save And Exit"  FontSize="13" Height="25" HorizontalAlignment="Left" Margin="549,19,0,0" Name="btnExit" VerticalAlignment="Top" Width="90" Click="BtmExit_Click"  />
+        </Grid>
+    </Border>
+</Window>
